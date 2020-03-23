@@ -1,3 +1,3 @@
 interface DatabaseConfig {
-  mongoCS: string;
+  mongoUri: string;
 }
