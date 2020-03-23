@@ -2,11 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
-import { TransactionsModule } from './transactions/transactions.module';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+function setupSwagger(app) {
   const options = new DocumentBuilder()
     .setTitle('MOVE6 Currency')
     .setDescription('MOVE6 Currency API Specs')
@@ -16,8 +13,15 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('/api', app, document);
+}
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  setupSwagger(app);
 
   const config = app.get(ConfigService);
   await app.listen(config.get('PORT'));
 }
+
 bootstrap();

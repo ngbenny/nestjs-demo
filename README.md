@@ -71,14 +71,20 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## API Endpoints / Swagger
 
-* GET /transactions
-* POST /transactions
+* [dev Swagger UI](http://localhost:3000/api)
 * [swagger](https://docs.nestjs.com/recipes/swagger)
 * [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
 * [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)
 
-
 ## Testing
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+```
 
 ## Microservice (RMQ / AMQP)
 
@@ -106,3 +112,5 @@ https://docs.nestjs.com/recipes/swagger
 ## [Optional] Database Migration
 
 ## [Optional] Traditional MVC
+
+## [Optional] Benchmarking
