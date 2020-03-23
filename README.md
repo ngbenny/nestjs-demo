@@ -88,6 +88,8 @@ $ npm run test:e2e
 
 ## Microservice (RMQ / AMQP)
 
+* microservice-client
+
 ## Logging
 
 ## Nest CLI
@@ -104,6 +106,10 @@ nest generate service transactions
 
 needs a different swagger
 https://docs.nestjs.com/recipes/swagger
+
+## NestJS Official Samples
+
+https://github.com/nestjs/nest/tree/master/sample
 
 ## [Optional] GraphQL
 

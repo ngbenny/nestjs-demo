@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
@@ -17,11 +18,25 @@ function setupSwagger(app) {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('v1');
 
   setupSwagger(app);
 
   const config = app.get(ConfigService);
-  await app.listen(config.get('PORT'));
+  const port = config.get<number>('PORT');
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.TCP,
+    options: { retryAttempts: 5, retryDelay: 3000 },
+  });
+
+  // start microservices
+  await app.startAllMicroservicesAsync();
+
+  // start web api
+  await app.listen(port);
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 
 bootstrap();
