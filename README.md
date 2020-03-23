@@ -10,6 +10,7 @@ Rewrite of move5 currency service with [Nest](https://github.com/nestjs/nest) fo
 
 ```bash
 $ npm install
+$ npm run init
 ```
 
 ## Running the app
@@ -61,6 +62,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## HMR
 
 ## Config / Env
+
+* [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
 
 ## JWT Auth
 
