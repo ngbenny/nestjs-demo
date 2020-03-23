@@ -53,6 +53,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
   Nest is [MIT licensed](LICENSE).
 
+---
+
 # Feature Highlights
 
 ## Folder Structure
@@ -68,6 +70,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## JWT Auth
 
 ## API Endpoints / Swagger
+
+* GET /transactions
+* POST /transactions
+
+## Testing
 
 ## Microservice (RMQ / AMQP)
 

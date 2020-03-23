@@ -1,6 +1,7 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body, Res, HttpStatus } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './interfaces/transaction.interface';
+import { CreateTransactionDto } from './dto/create-transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -12,7 +13,14 @@ export class TransactionsController {
   }
 
   @Post()
-  create(): Promise<Transaction> {
-    return this.transactionService.create(1124);
+  async create(
+    @Res() res,
+    @Body() dto: CreateTransactionDto,
+  ): Promise<Transaction> {
+    const transaction = await this.transactionService.create(dto);
+    return res.status(HttpStatus.OK).json({
+      message: 'Transaction has been created successfully',
+      transaction,
+    });
   }
 }
