@@ -73,6 +73,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 * GET /transactions
 * POST /transactions
+* [swagger](https://docs.nestjs.com/recipes/swagger)
+* [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
+* [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)
+
 
 ## Testing
 
@@ -91,6 +95,9 @@ nest generate service transactions
 ## Docker
 
 ## Performance (Fastify)
+
+needs a different swagger
+https://docs.nestjs.com/recipes/swagger
 
 ## [Optional] GraphQL
 
