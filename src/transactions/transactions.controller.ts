@@ -8,8 +8,11 @@ export class TransactionsController {
   constructor(private readonly transactionService: TransactionsService) {}
 
   @Get()
-  getAll(): Promise<Transaction[]> {
-    return this.transactionService.findAll();
+  getAll(@Res() res): Promise<Transaction[]> {
+    const transactions = this.transactionService.findAll();
+    return res.status(HttpStatus.OK).json({
+      data: transactions,
+    });
   }
 
   @Post()
@@ -20,7 +23,7 @@ export class TransactionsController {
     const transaction = await this.transactionService.create(dto);
     return res.status(HttpStatus.OK).json({
       message: 'Transaction has been created successfully',
-      transaction,
+      data: transaction,
     });
   }
 }

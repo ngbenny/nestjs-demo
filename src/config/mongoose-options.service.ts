@@ -3,7 +3,7 @@ import {
   MongooseOptionsFactory,
   MongooseModuleOptions,
 } from '@nestjs/mongoose';
-import { AppConfigService } from 'src/config/app-config.service';
+import { AppConfigService } from '../config/app-config.service';
 
 @Injectable()
 export class MongooseOptionsService implements MongooseOptionsFactory {
