@@ -1,0 +1,3 @@
+interface DatabaseConfig {
+  mongoUri: string;
+}
