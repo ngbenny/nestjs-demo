@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
+import { AppConfigService } from './config/app-config.service';
 
 function setupSwagger(app: INestApplication) {
   const options = new DocumentBuilder()
@@ -17,7 +18,7 @@ function setupSwagger(app: INestApplication) {
   SwaggerModule.setup('/api', app, document);
 }
 
-function setupMicroservice(app: INestApplication) {
+function setupMicroservice(app: INestApplication, appConfig: AppConfigService) {
   // app.connectMicroservice<MicroserviceOptions>({
   //   transport: Transport.TCP,
   //   options: { retryAttempts: 5, retryDelay: 3000 },
@@ -26,23 +27,23 @@ function setupMicroservice(app: INestApplication) {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://admin:local123@localhost:5672/move6'],
-      queue: 'currency_queue',
-      queueOptions: {
-        durable: false,
-      },
+      urls: [appConfig.amqpConfig.rmq.url],
+      queue: appConfig.amqpConfig.rmq.queue,
+      queueOptions: appConfig.amqpConfig.rmq.queueOptions,
     },
   });
 }
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = app.get(ConfigService);
-  const port = config.get<number>('PORT');
+  const appConfig = app.get(AppConfigService);
+  console.log('appConfigappConfig', appConfig);
+
+  const port = appConfig.port;
 
   app.setGlobalPrefix('v1');
   setupSwagger(app);
-  setupMicroservice(app);
+  setupMicroservice(app, appConfig);
 
   // start microservices
   await app.startAllMicroservicesAsync();

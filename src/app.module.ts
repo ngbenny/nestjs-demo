@@ -8,7 +8,7 @@ import { AppConfigModule } from './config/app-config.module';
 import { Transport, ClientProxyFactory } from '@nestjs/microservices';
 import { AppConfigService } from './config/app-config.service';
 
-const rmqlientFactory = {
+const rmqClientFactory = {
   provide: 'RMQ_CLIENT',
   useFactory: (config: AppConfigService) => {
     return ClientProxyFactory.create({
@@ -26,6 +26,6 @@ const rmqlientFactory = {
 @Module({
   imports: [AppConfigModule, DatabaseModule, TransactionsModule],
   controllers: [AppController],
-  providers: [AppService, rmqlientFactory],
+  providers: [AppService, rmqClientFactory],
 })
 export class AppModule {}

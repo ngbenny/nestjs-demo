@@ -66,6 +66,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## Config / Env
 
 * [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+* env is expandable
+```
+PORT=3000
+URL=http://localhost:${PORT}
+```
 
 ## JWT Auth
 
