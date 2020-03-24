@@ -5,7 +5,8 @@ export default () => ({
     mongoUri: process.env.MONGO_URL || 'mongodb://localhost/nest'
   },
 
-  amqp: {
+  messaging: {
+    transport: process.env.MESSAGING_TRANSPORT || 'rmq',
     rmq: {
       url: process.env.RMQ_URL || 'amqp://admin:local123@localhost:5672/move6',
       queue: process.env.RMQ_QUEUE || 'currency_queue'

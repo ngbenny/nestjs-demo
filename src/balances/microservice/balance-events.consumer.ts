@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
-import { UserEventPatterns, UserCreatedEvent } from 'src/app.controller';
 import { BalancesService } from '../balances.service';
+import { UserEventPatterns, UserCreatedEvent } from '../../rmq-client/events/rmq-client.events';
 
 @Controller()
 export class BalanceEventsConsumer {
@@ -14,3 +14,4 @@ export class BalanceEventsConsumer {
     this.balancesService.create({ userId: data.userId });
   }
 }
+

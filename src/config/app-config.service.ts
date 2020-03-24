@@ -15,11 +15,12 @@ export class AppConfigService {
     }
   }
 
-  get amqpConfig(): AmqpConfig {
+  get messagingConfig(): MessagingConfig {
     return {
+      transport: this.configService.get<string>('messaging.transport') as 'rmq' | 'tcp',
       rmq: {
-        url: this.configService.get<string>('amqp.rmq.url'),
-        queue: this.configService.get<string>('amqp.rmq.queue'),
+        url: this.configService.get<string>('messaging.rmq.url'),
+        queue: this.configService.get<string>('messaging.rmq.queue'),
         queueOptions: {
           durable: false
         }

@@ -1,4 +1,5 @@
-interface AmqpConfig {
+interface MessagingConfig {
+  transport: 'rmq' | 'tcp';
   rmq: {
     url: string;
     queue: string;

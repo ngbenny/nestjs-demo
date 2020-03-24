@@ -5,24 +5,9 @@ import { AppService } from './app.service';
 import { TransactionsModule } from './transactions/transactions.module';
 import { DatabaseModule } from './database/database.module';
 import { AppConfigModule } from './config/app-config.module';
-import { Transport, ClientProxyFactory } from '@nestjs/microservices';
-import { AppConfigService } from './config/app-config.service';
 import { BalancesModule } from './balances/balances.module';
+import { RmqClientModule } from './rmq-client/rmq-client.module';
 
-const rmqClientFactory = {
-  provide: 'RMQ_CLIENT',
-  useFactory: (config: AppConfigService) => {
-    return ClientProxyFactory.create({
-      transport: Transport.RMQ,
-      options: {
-        urls: [config.amqpConfig.rmq.url],
-        queue: config.amqpConfig.rmq.queue,
-        queueOptions: config.amqpConfig.rmq.queueOptions,
-      },
-    });
-  },
-  inject: [AppConfigService],
-};
 
 @Module({
   imports: [
@@ -30,8 +15,9 @@ const rmqClientFactory = {
     DatabaseModule,
     TransactionsModule,
     BalancesModule,
+    RmqClientModule,
   ],
   controllers: [AppController],
-  providers: [AppService, rmqClientFactory],
+  providers: [AppService],
 })
 export class AppModule {}

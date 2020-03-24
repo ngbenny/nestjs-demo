@@ -104,6 +104,8 @@ $ npm run test:e2e
 ## Microservice (RMQ / AMQP)
 
 * microservice-client
+* [custom transport is supported](https://docs.nestjs.com/microservices/custom-transport)
+* [standalone RMQ package](https://github.com/golevelup/nestjs/blob/master/packages/rabbitmq/README.md)
 
 ## Error Handling
 

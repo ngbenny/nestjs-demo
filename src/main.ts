@@ -12,6 +12,7 @@ function setupSwagger(app: INestApplication) {
     .setVersion('1.0')
     .addTag('Balances')
     .addTag('Transactions')
+    .addTag('Mock RabbitMQ Client')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
@@ -19,25 +20,28 @@ function setupSwagger(app: INestApplication) {
 }
 
 function setupMicroservice(app: INestApplication, appConfig: AppConfigService) {
-  // app.connectMicroservice<MicroserviceOptions>({
-  //   transport: Transport.TCP,
-  //   options: { retryAttempts: 5, retryDelay: 3000 },
-  // });
+  appConfig.messagingConfig.transport === 'rmq'
+    ? app.connectMicroservice<MicroserviceOptions>({
+        transport: Transport.RMQ,
+        options: {
+          urls: [appConfig.messagingConfig.rmq.url],
+          queue: appConfig.messagingConfig.rmq.queue,
+          queueOptions: appConfig.messagingConfig.rmq.queueOptions,
+        },
+      })
+    : app.connectMicroservice<MicroserviceOptions>({
+        transport: Transport.TCP,
+        options: { retryAttempts: 5, retryDelay: 3000 },
+      });
 
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.RMQ,
-    options: {
-      urls: [appConfig.amqpConfig.rmq.url],
-      queue: appConfig.amqpConfig.rmq.queue,
-      queueOptions: appConfig.amqpConfig.rmq.queueOptions,
-    },
-  });
+  console.log(
+    `Done setup microservice, transport: ${appConfig.messagingConfig.transport}`,
+  );
 }
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const appConfig = app.get(AppConfigService);
-  console.log('appConfigappConfig', appConfig);
 
   const port = appConfig.port;
 

@@ -16,14 +16,15 @@ export class BalancesService {
   ) {}
 
   async create(dto: CreateBalanceDto): Promise<Balance> {
-    const createdBalance = new this.balanceModel(dto);
+    const createdBalance = new this.balanceModel({
+      userId: dto.userId,
+      amount: 0,
+    });
     return createdBalance.save();
   }
 
   async findAll(query: QueryBalancesDto): Promise<Balance[]> {
-    const sanitizedQuery: Partial<QueryBalancesDto> = pick(query, [
-      'userId',
-    ]);
+    const sanitizedQuery: Partial<QueryBalancesDto> = pick(query, ['userId']);
     if (!sanitizedQuery.userId) {
       throw new UnprocessableEntityException('userId is not provided');
     }
