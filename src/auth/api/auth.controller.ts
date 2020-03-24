@@ -12,7 +12,7 @@ export class AuthController {
   ) {}
 
   @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
+  @Post('access_tokens')
   @ApiBody({ type: CreateUserDto })
   async login(@Request() req) {
     return this.authService.loginSuccess(req.user);

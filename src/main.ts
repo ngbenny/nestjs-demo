@@ -10,6 +10,7 @@ function setupSwagger(app: INestApplication) {
     .setTitle('MOVE6 Currency')
     .setDescription('MOVE6 Currency API Specs')
     .setVersion('1.0')
+    .addTag('Registration')
     .addTag('Authentications')
     .addTag('Balances')
     .addTag('Transactions')

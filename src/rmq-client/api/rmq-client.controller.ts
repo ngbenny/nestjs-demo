@@ -24,7 +24,7 @@ import {
 const RMQ_CLIENT = 'RMQ_CLIENT';
 
 @ApiTags('Mock RabbitMQ Client')
-@Controller('rmq-client')
+@Controller('rmq_client')
 export class RmqClientController {
   constructor(
     @Inject(RMQ_CLIENT)

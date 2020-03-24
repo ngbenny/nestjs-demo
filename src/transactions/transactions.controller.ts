@@ -47,7 +47,8 @@ export class TransactionsController {
     @Request() req,
     @Body() dto: CreateTransactionDto,
   ): Promise<Transaction> {
-    dto.userId = req.user.userId;
+    console.log('createing transaction', req.user)
+    dto.userId = req.user._id;
     const transaction = await this.transactionService.create(dto);
 
     const createdEvent = new TransactionCreatedEvent(
@@ -56,7 +57,7 @@ export class TransactionsController {
     );
     this.rmqClient.emit(createdEvent.pattern, createdEvent.payload);
 
-    return res.status(HttpStatus.OK).json({
+    return res.status(HttpStatus.CREATED).json({
       message: 'Transaction has been created successfully',
       data: transaction,
     });

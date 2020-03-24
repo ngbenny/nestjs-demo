@@ -7,5 +7,5 @@ export const BalanceSchema = new mongoose.Schema({
   },
   amount: Number,
   updatedAt: Date,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
