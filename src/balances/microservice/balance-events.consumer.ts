@@ -8,7 +8,7 @@ import {
 import {
   TransactionEventPatterns,
   TransactionCreatedEvent,
-} from 'src/transactions/events/transaction.events';
+} from '../../transactions/events/transaction.events';
 
 @Controller()
 export class BalanceEventsConsumer {

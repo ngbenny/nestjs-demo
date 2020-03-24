@@ -76,6 +76,8 @@ URL=http://localhost:${PORT}
 
 ## JWT Auth
 
+* [recipe](https://docs.nestjs.com/v6/techniques/authentication)
+
 ## API Endpoints / Swagger
 
 * [dev Swagger UI](http://localhost:3000/api)
@@ -143,17 +145,18 @@ https://docs.nestjs.com/recipes/swagger
 
 https://github.com/nestjs/nest/tree/master/sample
 
-## [Bonus] GraphQL
 
-## [Bonus] Websocket
+## [TODO] GraphQL
 
-## [Bonus] Database Migration
+## [TODO] Websocket
 
-## [Bonus] Traditional MVC
+## [TODO] Database Migration
 
-## [Bonus] Benchmarking
+## [TODO] Traditional MVC
 
-## [Bonus] Queue
+## [TODO] Benchmarking
+
+## [TODO] Queue
 
 * https://docs.nestjs.com/techniques/queues
 * https://github.com/OptimalBits/bull

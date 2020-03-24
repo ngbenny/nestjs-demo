@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { RmqClientController } from './api/rmq-client.controller';
-import { AppConfigService } from 'src/config/app-config.service';
+import { AppConfigService } from '../config/app-config.service';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
-import { AppService } from 'src/app.service';
-import { AppConfigModule } from 'src/config/app-config.module';
+import { AppService } from '../app.service';
+import { AppConfigModule } from '../config/app-config.module';
 
 const rmqClientFactory = {
   provide: 'RMQ_CLIENT',
