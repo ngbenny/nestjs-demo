@@ -9,6 +9,29 @@ class Message {
   }
 }
 
+// TODO move to user domain
+
+export enum UserEventPatterns {
+  UserCreated = 'user.created'
+}
+
+export abstract class UserEvent {
+  abstract get pattern(): string;
+  abstract get payload(): any;
+}
+
+export class UserCreatedEvent implements UserEvent {
+  constructor(public userId: string) {}
+  get payload(): any {
+    return {
+      userId: this.userId,
+    };
+  }
+  get pattern(): string {
+    return UserEventPatterns.UserCreated;
+  }
+}
+
 @Controller()
 export class AppController {
   constructor(
@@ -31,10 +54,14 @@ export class AppController {
     // const payload = [1, 2, 3];
     // return this.client.send<number>(pattern, payload);
 
-    this.rmqClient.emit<any>(
-      'ping',
-      new Message(`Hello World, it's now - ${new Date()}`),
-    );
+    // this.rmqClient.emit<any>(
+    //   'ping',
+    //   new Message(`Hello World, it's now - ${new Date()}`),
+    // );
+
+    const event = new UserCreatedEvent('user123');
+    this.rmqClient.emit<any>(event.pattern, event.payload);
+
     return 'ping sent';
   }
 }

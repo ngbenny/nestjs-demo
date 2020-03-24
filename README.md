@@ -61,6 +61,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Database / ORM (Mongoose / Mongo)
 
+* uniqueness (Balance::UserId)
+
 ## HMR
 
 ## Config / Env
@@ -82,6 +84,13 @@ URL=http://localhost:${PORT}
 * [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
 * [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)
 
+### Balance
+
+* http://localhost:3000/v1/balances?userId=123
+* http://localhost:3000/v1/transactions?userId=123
+
+## Typescript
+
 ## Testing
 
 ```bash
@@ -95,6 +104,17 @@ $ npm run test:e2e
 ## Microservice (RMQ / AMQP)
 
 * microservice-client
+
+## Error Handling
+
+* http://localhost:3000/v1/balances
+```json
+{
+    "statusCode": 422,
+    "message": "userId is not provided",
+    "error": "Unprocessable Entity"
+}
+```
 
 ## Logging
 
@@ -121,12 +141,17 @@ https://docs.nestjs.com/recipes/swagger
 
 https://github.com/nestjs/nest/tree/master/sample
 
-## [Optional] GraphQL
+## [Bonus] GraphQL
 
-## [Optional] Websocket
+## [Bonus] Websocket
 
-## [Optional] Database Migration
+## [Bonus] Database Migration
 
-## [Optional] Traditional MVC
+## [Bonus] Traditional MVC
 
-## [Optional] Benchmarking
+## [Bonus] Benchmarking
+
+## [Bonus] Queue
+
+* https://docs.nestjs.com/techniques/queues
+* https://github.com/OptimalBits/bull
