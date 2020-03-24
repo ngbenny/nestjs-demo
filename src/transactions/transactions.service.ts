@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { pick } from 'lodash';
 import { Transaction } from './interfaces/transaction.interface';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { QueryTransactionsDto } from './dto/query-transactions.dto';
 
 // FIXME avoid magic strings
 
@@ -18,7 +20,10 @@ export class TransactionsService {
     return createdTransaction.save();
   }
 
-  async findAll(): Promise<Transaction[]> {
-    return this.transactionModel.find().exec();
+  async findAll(query: QueryTransactionsDto): Promise<Transaction[]> {
+    const sanitizedQuery: Partial<QueryTransactionsDto> = pick(query, [
+      'userId',
+    ]);
+    return this.transactionModel.find(sanitizedQuery).exec();
   }
 }

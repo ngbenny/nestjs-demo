@@ -61,26 +61,62 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Database / ORM (Mongoose / Mongo)
 
+* uniqueness (Balance::UserId)
+
 ## HMR
 
 ## Config / Env
 
 * [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
+* env is expandable
+```
+PORT=3000
+URL=http://localhost:${PORT}
+```
 
 ## JWT Auth
 
 ## API Endpoints / Swagger
 
-* GET /transactions
-* POST /transactions
+* [dev Swagger UI](http://localhost:3000/api)
+* [dev Swagger UI (JSON)](http://localhost:3002/api-json)
 * [swagger](https://docs.nestjs.com/recipes/swagger)
 * [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
 * [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)
 
+### Balance
+
+* http://localhost:3000/v1/balances?userId=123
+* http://localhost:3000/v1/transactions?userId=123
+
+## Typescript
 
 ## Testing
 
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+```
+
 ## Microservice (RMQ / AMQP)
+
+* microservice-client
+* [custom transport is supported](https://docs.nestjs.com/microservices/custom-transport)
+* [standalone RMQ package](https://github.com/golevelup/nestjs/blob/master/packages/rabbitmq/README.md)
+
+## Error Handling
+
+* http://localhost:3000/v1/balances
+```json
+{
+    "statusCode": 422,
+    "message": "userId is not provided",
+    "error": "Unprocessable Entity"
+}
+```
 
 ## Logging
 
@@ -90,6 +126,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 nest generate module transactions
 nest generate controller transactions
 nest generate service transactions
+
+nest generate module balances
+nest generate controller balances
+nest generate service balances
 ```
 
 ## Docker
@@ -99,10 +139,21 @@ nest generate service transactions
 needs a different swagger
 https://docs.nestjs.com/recipes/swagger
 
-## [Optional] GraphQL
+## NestJS Official Samples
 
-## [Optional] Websocket
+https://github.com/nestjs/nest/tree/master/sample
 
-## [Optional] Database Migration
+## [Bonus] GraphQL
 
-## [Optional] Traditional MVC
+## [Bonus] Websocket
+
+## [Bonus] Database Migration
+
+## [Bonus] Traditional MVC
+
+## [Bonus] Benchmarking
+
+## [Bonus] Queue
+
+* https://docs.nestjs.com/techniques/queues
+* https://github.com/OptimalBits/bull
