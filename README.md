@@ -72,6 +72,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## API Endpoints / Swagger
 
 * [dev Swagger UI](http://localhost:3000/api)
+* [dev Swagger UI (JSON)](http://localhost:3002/api-json)
 * [swagger](https://docs.nestjs.com/recipes/swagger)
 * [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
 * [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)

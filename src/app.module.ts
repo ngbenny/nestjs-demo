@@ -15,6 +15,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 
     ClientsModule.register([
       { name: 'BALANCE_SERVICE', transport: Transport.TCP },
+      {
+        name: 'RMQ_CLIENT',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://admin:local123@localhost:5672/hello'],
+          queue: 'currency_queue',
+          queueOptions: {
+            durable: false,
+          },
+        },
+      },
     ]),
   ],
   controllers: [AppController],

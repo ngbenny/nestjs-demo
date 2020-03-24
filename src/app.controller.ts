@@ -17,6 +17,10 @@ export class AppController {
     // @Client({ transport: Transport.TCP })
     @Inject('BALANCE_SERVICE')
     private readonly client: ClientProxy,
+
+    @Inject('RMQ_CLIENT')
+    private readonly rmqClient: ClientProxy,
+    
   ) {}
 
   @EventPattern('ping')
@@ -32,7 +36,7 @@ export class AppController {
     // const payload = [1, 2, 3];
     // return this.client.send<number>(pattern, payload);
 
-    this.client.emit<any>(
+    this.rmqClient.emit<any>(
       'ping',
       new Message(`Hello World, it's now - ${new Date()}`),
     );
