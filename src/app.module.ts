@@ -7,6 +7,8 @@ import { DatabaseModule } from './database/database.module';
 import { AppConfigModule } from './config/app-config.module';
 import { BalancesModule } from './balances/balances.module';
 import { RmqClientModule } from './rmq-client/rmq-client.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -16,6 +18,8 @@ import { RmqClientModule } from './rmq-client/rmq-client.module';
     TransactionsModule,
     BalancesModule,
     RmqClientModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,12 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateTransactionDto {
-  @ApiProperty()
+  @ApiProperty({ example: 'john' })
   userId: string;
 
-  @ApiProperty({ default: 0 })
+  @ApiProperty({ default: 0, example: 0 })
   amount: number;
 
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ example: '' })
   sourceRequestId: string;
 }
