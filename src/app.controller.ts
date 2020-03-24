@@ -1,7 +1,6 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ClientProxy, EventPattern } from '@nestjs/microservices';
-import { RabbitMQClientProxy } from './app.module';
 
 class Message {
   text: string;
@@ -15,14 +14,8 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
 
-    // @Client({ transport: Transport.TCP })
-    @Inject('BALANCE_SERVICE')
-    private readonly client: ClientProxy,
-
     @Inject('RMQ_CLIENT')
     private readonly rmqClient: ClientProxy,
-    
-    
   ) {}
 
   @EventPattern('ping')

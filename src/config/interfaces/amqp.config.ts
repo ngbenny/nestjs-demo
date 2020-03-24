@@ -1,3 +1,9 @@
 interface AmqpConfig {
-  rabbitmqUri: string;
+  rmq: {
+    url: string;
+    queue: string;
+    queueOptions?: {
+      durable: boolean
+    }
+  }
 }

@@ -6,6 +6,9 @@ export default () => ({
   },
 
   amqp: {
-    rabbitmqUri: process.env.RABBITMQ_URI || 'amqp://admin:local123@localhost:5672/move6'
+    rmq: {
+      url: process.env.RMQ_URL || 'amqp://admin:local123@localhost:5672/move6',
+      queue: process.env.RMQ_QUEUE || 'currency_queue'
+    }
   }
 });

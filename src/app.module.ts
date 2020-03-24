@@ -1,71 +1,31 @@
-import { Module, Injectable } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TransactionsModule } from './transactions/transactions.module';
 import { DatabaseModule } from './database/database.module';
 import { AppConfigModule } from './config/app-config.module';
-import {
-  ClientsModule,
-  Transport,
-  ClientProxyFactory,
-  ClientProxy,
-} from '@nestjs/microservices';
+import { Transport, ClientProxyFactory } from '@nestjs/microservices';
 import { AppConfigService } from './config/app-config.service';
 
-@Injectable()
-export abstract class RabbitMQClientProxy extends ClientProxy {
-
-}
-
-class RabbitMQClientProxyFactory {
-  constructor(private appConfigService: AppConfigService) {}
-
-  static create(): any {
+const rmqlientFactory = {
+  provide: 'RMQ_CLIENT',
+  useFactory: (config: AppConfigService) => {
     return ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://admin:local123@localhost:5672/move6'],
-        queue: 'currency_queue',
-        queueOptions: {
-          durable: false,
-        },
+        urls: [config.amqpConfig.rmq.url],
+        queue: config.amqpConfig.rmq.queue,
+        queueOptions: config.amqpConfig.rmq.queueOptions,
       },
     });
-  }
-}
+  },
+  inject: [AppConfigService],
+};
 
 @Module({
-  imports: [
-    AppConfigModule,
-    DatabaseModule,
-    TransactionsModule,
-
-    ClientsModule.register([
-      { name: 'BALANCE_SERVICE', transport: Transport.TCP },
-    ]),
-  ],
+  imports: [AppConfigModule, DatabaseModule, TransactionsModule],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: 'RMQ_CLIENT',
-      useFactory: (config: AppConfigService) => {
-        // const mathSvcOptions = configService.getMathSvcOptions();
-        return ClientProxyFactory.create({
-          transport: Transport.RMQ,
-          options: {
-            urls: ['amqp://admin:local123@localhost:5672/move6'],
-            queue: 'currency_queue',
-            queueOptions: {
-              durable: false,
-            },
-          },
-        });
-      },
-      inject: [AppConfigService],
-      // useFactory: RabbitMQClientProxyFactory.create,
-    },
-  ],
+  providers: [AppService, rmqlientFactory],
 })
 export class AppModule {}

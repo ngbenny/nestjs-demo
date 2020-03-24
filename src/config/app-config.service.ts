@@ -13,7 +13,13 @@ export class AppConfigService {
 
   get amqpConfig(): AmqpConfig {
     return {
-      rabbitmqUri: this.configService.get<string>('amqp.rabbitmqUri')
+      rmq: {
+        url: this.configService.get<string>('amqp.rmq.url'),
+        queue: this.configService.get<string>('amqp.rmq.queue'),
+        queueOptions: {
+          durable: false
+        }
+      },
     }
   }
   
