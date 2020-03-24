@@ -27,5 +27,6 @@ const rmqClientFactory = {
   imports: [AppConfigModule],
   controllers: [RmqClientController],
   providers: [AppService, rmqClientFactory],
+  exports: [rmqClientFactory],
 })
 export class RmqClientModule {}
