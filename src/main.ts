@@ -26,7 +26,7 @@ function setupMicroservice(app: INestApplication) {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://admin:local123@localhost:5672/hello'],
+      urls: ['amqp://admin:local123@localhost:5672/move6'],
       queue: 'currency_queue',
       queueOptions: {
         durable: false,

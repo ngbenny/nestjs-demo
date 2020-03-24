@@ -10,4 +10,11 @@ export class AppConfigService {
       mongoUri: this.configService.get<string>('database.mongoUri')
     }
   }
+
+  get amqpConfig(): AmqpConfig {
+    return {
+      rabbitmqUri: this.configService.get<string>('amqp.rabbitmqUri')
+    }
+  }
+  
 }

@@ -1,0 +1,3 @@
+interface AmqpConfig {
+  rabbitmqUri: string;
+}
