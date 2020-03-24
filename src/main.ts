@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { AppConfigService } from './config/app-config.service';
@@ -11,6 +10,7 @@ function setupSwagger(app: INestApplication) {
     .setTitle('MOVE6 Currency')
     .setDescription('MOVE6 Currency API Specs')
     .setVersion('1.0')
+    .addTag('Balances')
     .addTag('Transactions')
     .build();
 

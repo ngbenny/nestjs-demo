@@ -104,6 +104,10 @@ $ npm run test:e2e
 nest generate module transactions
 nest generate controller transactions
 nest generate service transactions
+
+nest generate module balances
+nest generate controller balances
+nest generate service balances
 ```
 
 ## Docker

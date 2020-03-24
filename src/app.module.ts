@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { AppConfigModule } from './config/app-config.module';
 import { Transport, ClientProxyFactory } from '@nestjs/microservices';
 import { AppConfigService } from './config/app-config.service';
+import { BalancesModule } from './balances/balances.module';
 
 const rmqClientFactory = {
   provide: 'RMQ_CLIENT',
@@ -24,7 +25,12 @@ const rmqClientFactory = {
 };
 
 @Module({
-  imports: [AppConfigModule, DatabaseModule, TransactionsModule],
+  imports: [
+    AppConfigModule,
+    DatabaseModule,
+    TransactionsModule,
+    BalancesModule,
+  ],
   controllers: [AppController],
   providers: [AppService, rmqClientFactory],
 })

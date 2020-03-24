@@ -18,10 +18,10 @@ export class AppController {
     private readonly rmqClient: ClientProxy,
   ) {}
 
-  @EventPattern('ping')
-  async handlePing(data: Record<string, unknown>) {
-    console.log(`pong - ${data.text}`);
-  }
+  // @EventPattern('ping')
+  // async handlePing(data: Record<string, unknown>) {
+  //   console.log(`pong - ${data.text}`);
+  // }
 
   @Get()
   getHello(): string {
