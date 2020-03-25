@@ -1,6 +1,8 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://manulifemove.hk//" target="blank"><img src="https://manulifemove.hk/common/img/brand/Logo.svg" width="320" alt="Nest Logo" /></a>
 </p>
+
+# NestJS Demo for MOVE
 
 ## Description
 
@@ -22,6 +24,9 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
+# hmr mode
+$ npm run start:dev:hmr
+
 # production mode
 $ npm run start:prod
 ```
@@ -39,33 +44,19 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
-
 ---
 
-# Feature Highlights
+## Topics Highlight
 
-## Folder Structure
+### Folder Structure
 
-## Database / ORM (Mongoose / Mongo)
+### Database / ORM (Mongoose / Mongo)
 
 * uniqueness (Balance::UserId)
 
-## HMR
+### HMR
 
-## Config / Env
+### Config / Env
 
 * [NestJS Configuration](https://docs.nestjs.com/techniques/configuration)
 * env is expandable
@@ -74,11 +65,13 @@ PORT=3000
 URL=http://localhost:${PORT}
 ```
 
-## JWT Auth
+### JWT Auth
 
-* [recipe](https://docs.nestjs.com/v6/techniques/authentication)
+* [Full Recipe](https://docs.nestjs.com/v6/techniques/authentication)
+* Passport
+* Request-scoped
 
-## API Endpoints / Swagger
+### API Endpoints / Swagger
 
 * [dev Swagger UI](http://localhost:3000/api)
 * [dev Swagger UI (JSON)](http://localhost:3002/api-json)
@@ -86,14 +79,29 @@ URL=http://localhost:${PORT}
 * [swagger (Multiple specifications)](https://docs.nestjs.com/recipes/swagger#multiple-specifications)
 * [swagger (auto decorate)](https://docs.nestjs.com/recipes/swagger#plugin)
 
-### Balance
+##### Balance endpoints
 
-* http://localhost:3000/v1/balances?userId=123
-* http://localhost:3000/v1/transactions?userId=123
+* GET http://localhost:3000/v1/balances?userId=123
 
-## Typescript
+##### Transaction endpoints
 
-## Testing
+* GET http://localhost:3000/v1/transactions?userId=123
+* POST http://localhost:3000/v1/transactions
+
+##### Mock RMQ client endpoints
+
+* POST http://localhost:3000/v1/rmq-client/events/user-created-events
+* POST http://localhost:3000/v1/rmq-client/messages/query-user-balance
+
+
+### Typescript
+
+* @types/Xyz
+* Jump to definition
+* Compile time type checking
+* [warning] not truly runtime safe (TS meta not available in transpiled JS)
+
+### Testing
 
 ```bash
 # unit tests
@@ -103,13 +111,14 @@ $ npm run test
 $ npm run test:e2e
 ```
 
-## Microservice (RMQ / AMQP)
+### Microservice (RMQ / AMQP)
 
-* microservice-client
-* [custom transport is supported](https://docs.nestjs.com/microservices/custom-transport)
-* [standalone RMQ package](https://github.com/golevelup/nestjs/blob/master/packages/rabbitmq/README.md)
+* Request-response VS event based
+* microservice-client (ClientProxy)
+* [Custom transport is supported](https://docs.nestjs.com/microservices/custom-transport)
+* [Standalone RMQ package](https://github.com/golevelup/nestjs/blob/master/packages/rabbitmq/README.md)
 
-## Error Handling
+### Error Handling
 
 * http://localhost:3000/v1/balances
 ```json
@@ -120,9 +129,11 @@ $ npm run test:e2e
 }
 ```
 
-## Logging
+* `RpcException` - microserverversion of HttpException
 
-## Nest CLI
+### Logging
+
+### Nest CLI
 
 ```
 nest generate module transactions
@@ -134,29 +145,52 @@ nest generate controller balances
 nest generate service balances
 ```
 
-## Docker
+### Docker
 
-## Performance (Fastify)
+### Performance (Fastify)
 
-needs a different swagger
+* Needs a different swagger
 https://docs.nestjs.com/recipes/swagger
 
-## NestJS Official Samples
+### NestJS Official Samples
 
 https://github.com/nestjs/nest/tree/master/sample
 
 
-## [TODO] GraphQL
+### [TODO] GraphQL
 
-## [TODO] Websocket
+### [TODO] Websocket
 
-## [TODO] Database Migration
+### [TODO] Database Migration
 
-## [TODO] Traditional MVC
+### [TODO] Traditional MVC
 
-## [TODO] Benchmarking
+### [TODO] Benchmarking
 
-## [TODO] Queue
+### [TODO] Queue
 
 * https://docs.nestjs.com/techniques/queues
 * https://github.com/OptimalBits/bull
+
+
+------
+
+
+# Support Nest
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+</p>
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+  Nest is [MIT licensed](LICENSE).
