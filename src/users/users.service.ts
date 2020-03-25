@@ -4,17 +4,21 @@ import { Model } from 'mongoose';
 import { hash } from 'bcryptjs';
 import { User } from './interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user-dto';
+import { MyLogger } from 'src/logger/my-logger.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel('User')
     private userModel: Model<User>,
-  ) {}
+    private logger: MyLogger,
+  ) {
+    this.logger.setContext('UsersService');
+  }
 
   async create(dto: CreateUserDto): Promise<User> {
+    this.logger.debug(`Creating user: usename=${dto.username}`);
     const password = await hash(dto.password, 10);
-    console.log('creating user', dto, password);
     const createdUser = new this.userModel({
       username: dto.username,
       password: password,

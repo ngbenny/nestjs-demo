@@ -50,11 +50,16 @@ $ npm run test:cov
 
 ### Folder Structure
 
+* Modularised
+
 ### Database / ORM (Mongoose / Mongo)
 
-* uniqueness (Balance::UserId)
+* e.g. Uniqueness (Balance::UserId)
 
 ### HMR
+
+* `webpack-hmr.config.js`
+* `npm run start:dev:hmr`
 
 ### Config / Env
 
@@ -103,6 +108,9 @@ URL=http://localhost:${PORT}
 
 ### Testing
 
+* jest & supertest
+* [Nest Docs](https://docs.nestjs.com/v6/fundamentals/testing)
+
 ```bash
 # unit tests
 $ npm run test
@@ -132,6 +140,11 @@ $ npm run test:e2e
 * `RpcException` - microserverversion of HttpException
 
 ### Logging
+
+* Built-in configurable loggers
+* Override by custom logger
+* [Nest Logger](https://docs.nestjs.com/v6/techniques/logger)
+* Demo: duplicate user sign up
 
 ### Nest CLI
 
