@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { AppConfigService } from './config/app-config.service';
 
+declare const module: any;
+
 function setupSwagger(app: INestApplication) {
   const options = new DocumentBuilder()
     .setTitle('MOVE6 Currency')
@@ -59,6 +61,11 @@ async function bootstrap() {
   await app.listen(port);
 
   console.log(`Application is running on: ${await app.getUrl()}`);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 
 bootstrap();
