@@ -4,8 +4,11 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { AppConfigService } from './config/app-config.service';
+import { MyLogger } from './logger/my-logger.service';
 
 declare const module: any;
+
+const apiSwaggerPath = '/api';
 
 function setupSwagger(app: INestApplication) {
   const options = new DocumentBuilder()
@@ -21,7 +24,7 @@ function setupSwagger(app: INestApplication) {
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/api', app, document);
+  SwaggerModule.setup(apiSwaggerPath, app, document);
 }
 
 function setupMicroservice(app: INestApplication, appConfig: AppConfigService) {
@@ -45,7 +48,7 @@ function setupMicroservice(app: INestApplication, appConfig: AppConfigService) {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {logger: MyLogger});
   const appConfig = app.get(AppConfigService);
 
   const port = appConfig.port;
@@ -53,6 +56,7 @@ async function bootstrap() {
   app.setGlobalPrefix('v1');
   setupSwagger(app);
   setupMicroservice(app, appConfig);
+  app.useLogger(await app.resolve(MyLogger));
 
   // start microservices
   await app.startAllMicroservicesAsync();
@@ -60,7 +64,10 @@ async function bootstrap() {
   // start web api
   await app.listen(port);
 
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  const appUrl = await app.getUrl();
+  console.log(
+    `\nApplication is running on: ${appUrl}\nAPI specs: ${appUrl}${apiSwaggerPath}`,
+  );
 
   if (module.hot) {
     module.hot.accept();
