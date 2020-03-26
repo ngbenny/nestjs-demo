@@ -12,6 +12,9 @@ export class MongooseOptionsService implements MongooseOptionsFactory {
   createMongooseOptions(): MongooseModuleOptions {
     return {
       uri: this.appConfigService.databaseConfig.mongoUri,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
     };
   }
 }
