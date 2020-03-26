@@ -1,6 +1,6 @@
 # tech sharing
 
-###### from LOFT
+###### NestJS, by LOFT
 
 ---
 
