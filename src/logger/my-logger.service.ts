@@ -20,15 +20,6 @@ export class MyLogger extends Logger {
 
   error(message: string, trace: string) {
     // custom logs logic e.g. integrate with winston (https://github.com/winstonjs/winston)
-    console.log(`
-    ####### ######  ######  ####### ######  
-    #       #     # #     # #     # #     # 
-    #       #     # #     # #     # #     # 
-    #####   ######  ######  #     # ######  
-    #       #   #   #   #   #     # #   #   
-    #       #    #  #    #  #     # #    #  
-    ####### #     # #     # ####### #     # 
-    `);
     Logger.error(message, trace, this.context);
   }
 }

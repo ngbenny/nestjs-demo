@@ -4,19 +4,22 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { INestApplication } from '@nestjs/common';
 import { AppConfigService } from './config/app-config.service';
-import { MyLogger } from './logger/my-logger.service';
+import { LoftLogger } from './logger/loft-logger.service';
 
 declare const module: any;
+
+const logger = new LoftLogger();
+logger.setContext('Bootstrap');
 
 const apiSwaggerPath = '/api';
 
 function setupSwagger(app: INestApplication) {
   const options = new DocumentBuilder()
-    .setTitle('MOVE6 Currency')
+    .setTitle('Currency NestJS Demo')
     .setDescription('MOVE6 Currency API Specs')
     .setVersion('1.0')
     .addTag('Registration')
-    .addTag('Authentications')
+    .addTag('Login')
     .addTag('Balances')
     .addTag('Transactions')
     .addTag('Mock RabbitMQ Client')
@@ -42,13 +45,13 @@ function setupMicroservice(app: INestApplication, appConfig: AppConfigService) {
         options: { retryAttempts: 5, retryDelay: 3000 },
       });
 
-  console.log(
+  logger.log(
     `Done setup microservice, transport: ${appConfig.messagingConfig.transport}`,
   );
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {logger: MyLogger});
+  const app = await NestFactory.create(AppModule, { logger: false });
   const appConfig = app.get(AppConfigService);
 
   const port = appConfig.port;
@@ -56,7 +59,7 @@ async function bootstrap() {
   app.setGlobalPrefix('v1');
   setupSwagger(app);
   setupMicroservice(app, appConfig);
-  app.useLogger(await app.resolve(MyLogger));
+  // app.useLogger(await app.resolve(MyLogger));
 
   // start microservices
   await app.startAllMicroservicesAsync();
@@ -65,8 +68,9 @@ async function bootstrap() {
   await app.listen(port);
 
   const appUrl = await app.getUrl();
-  console.log(
-    `\nApplication is running on: ${appUrl}\nAPI specs: ${appUrl}${apiSwaggerPath}`,
+
+  logger.log(
+    `Application is running on: ${appUrl}\nAPI specs: ${appUrl}${apiSwaggerPath}`,
   );
 
   if (module.hot) {

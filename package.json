@@ -1,5 +1,5 @@
 {
-  "name": "move6-currency-nestjs",
+  "name": "currency-nestjs-demo",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -39,6 +39,7 @@
     "amqp-connection-manager": "^3.2.0",
     "amqplib": "^0.5.5",
     "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.5",
     "passport": "^0.4.1",

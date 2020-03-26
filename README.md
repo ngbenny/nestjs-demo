@@ -2,11 +2,11 @@
   <a href="https://manulifemove.hk//" target="blank"><img src="https://manulifemove.hk/common/img/brand/Logo.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-# NestJS Demo for MOVE
+# Currency NestJS Demo 
 
 ## Description
 
-Rewrite of move5 currency service with [Nest](https://github.com/nestjs/nest) for demo purpose.
+Using move5 currency service as reference, [Nest](https://github.com/nestjs/nest) demo for MOVE team future backend stack consideration.
 
 ## Installation
 
@@ -182,9 +182,20 @@ https://github.com/nestjs/nest/tree/master/sample
 
 ### [TODO] Queue
 
+### [TODO] Mongo Transaction
+
 * https://docs.nestjs.com/techniques/queues
 * https://github.com/OptimalBits/bull
 
+
+---
+
+# Demo Slides
+
+```
+npm i -g reveal-md
+reveal-md slides.md  --theme simple
+```
 
 ------
 

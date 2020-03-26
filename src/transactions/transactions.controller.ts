@@ -47,7 +47,7 @@ export class TransactionsController {
     @Request() req,
     @Body() dto: CreateTransactionDto,
   ): Promise<Transaction> {
-    console.log('createing transaction', req.user)
+    console.log('creating transaction', req.user)
     dto.userId = req.user._id;
     const transaction = await this.transactionService.create(dto);
 

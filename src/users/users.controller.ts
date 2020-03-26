@@ -12,7 +12,7 @@ import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
 import { UserCreatedEvent } from 'src/rmq-client/events/rmq-client.events';
 import { ClientProxy } from '@nestjs/microservices';
-import { MyLogger } from 'src/logger/my-logger.service';
+import { LoftLogger } from 'src/logger/loft-logger.service';
 
 // TODO refactor
 const RMQ_CLIENT = 'RMQ_CLIENT';
@@ -24,19 +24,22 @@ export class UsersController {
     private readonly userService: UsersService,
     @Inject(RMQ_CLIENT)
     private readonly rmqClient: ClientProxy,
-    private logger: MyLogger,
+    private logger: LoftLogger,
   ) {
     this.logger.setContext('UsersController');
   }
 
   @Post()
   async create(@Res() res, @Body() dto: CreateUserDto): Promise<User> {
-    this.logger.debug(`User signing up: usename=${dto.username}`);
     try {
       const user = await this.userService.create(dto);
 
       const createdEvent = new UserCreatedEvent(user._id);
       this.rmqClient.emit(createdEvent.pattern, createdEvent.payload);
+      this.logger.debug(`
+User signing up: usename = ${dto.username}
+Publishing '${createdEvent.pattern}': userId = ${user._id}
+      `);
 
       return res.status(HttpStatus.CREATED).json({
         message: 'User has been created successfully',

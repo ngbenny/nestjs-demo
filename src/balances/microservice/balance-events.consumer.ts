@@ -9,21 +9,30 @@ import {
   TransactionEventPatterns,
   TransactionCreatedEvent,
 } from '../../transactions/events/transaction.events';
+import { LoftLogger } from 'src/logger/loft-logger.service';
 
 @Controller()
 export class BalanceEventsConsumer {
-  constructor(private balancesService: BalancesService) {}
+  constructor(
+    private readonly balancesService: BalancesService,
+    private readonly logger: LoftLogger,
+  ) {
+    this.logger.setContext('BalanceEventsConsumer');
+  }
 
   @EventPattern(UserEventPatterns.UserCreated)
   async handleUserCreated(@Payload() data: UserCreatedEvent) {
-    console.log(`Creating balance for user - ${data.userId}`);
+    this.logger.log(`
+Consuming event for '${UserEventPatterns.UserCreated}'
+Creating balance for user: userId = ${data.userId}
+    `);
 
     await this.balancesService.create({ userId: data.userId });
   }
 
   @EventPattern(TransactionEventPatterns.TransactionCreated)
   async handleTransactionCreated(@Payload() data: TransactionCreatedEvent) {
-    console.log(
+    this.logger.log(
       `Handling transaction for user - ${data.userId}, amount - ${data.amount}`,
     );
 
