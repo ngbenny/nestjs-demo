@@ -195,6 +195,9 @@ https://github.com/nestjs/nest/tree/master/sample
 ```
 npm i -g reveal-md
 reveal-md slides.md  --theme simple
+
+# or with docker
+docker run --rm -p 1948:1948 -v <folder-containers-slides-md>:/slides webpronl/reveal-md:latest /slides  --theme simple
 ```
 
 ------
