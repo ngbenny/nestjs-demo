@@ -198,6 +198,9 @@ reveal-md slides.md  --theme simple
 
 # or with docker
 docker run --rm -p 1948:1948 -v <folder-containers-slides-md>:/slides webpronl/reveal-md:latest /slides  --theme simple
+
+# generate slides PDF
+docker run --rm -t --net=host -v `pwd`:/slides astefanutti/decktape http://localhost:1948/slides.md slides.pdf
 ```
 
 ------
