@@ -1,3 +1,13 @@
+---
+title: "tech sharing - NestJS, by LOFT"
+theme: simple
+controls: false
+highlightTheme: tomorrow-night-bright
+revealOptions:
+    transition: 'fade'
+   
+---
+
 # tech sharing
 
 ###### NestJS, by LOFT
@@ -6,13 +16,13 @@
 
 ## objectives
 
-* sharing studies on NestJS
-* reference for MOVE team after LB3 LTS
+* backend choice for MOVE team after LB3 LTS
+* quick overview on NestJS with codes
 * currency service journey as demo
 
 ---
 
-## currency service specs
+## currency - user specs
 
 * User can Register
 * User can Login
@@ -32,14 +42,13 @@
 
 ---
 
-## currency service specs
-
-* [**REST**] User can Signup
-* [**REST**] User can Login
-* [**REST**] User can create Transaction
-* [**REST**] User can query Balance
-* [**Microservice**] System will create Balance
-* [**Microservice**] System will update Balance
+## currency - tech specs
+* [**REST**] User can Signup (POST /users)
+* [**REST**] User can Login (POST /access_tokens)
+* [**REST**] User can create (POST /transactions)
+* [**REST**] User can query (GET /balances?userId=)
+* [**microservice**] System will create Balance ('user.created')
+* [**microservice**] System will update Balance ('transaction.created')
 
 ---
 
@@ -420,9 +429,15 @@ this.rmqClient.send(BalanceEventPatterns.QueryUserBalance, payload)
 
 ---
 
-## A O B
+## other backend candidates
 
-* Explore Golang (e.g. enabling Distributed Tracing)
+* LoopBack 4
+* Golang (e.g. good for Distributed Tracing)
+
+---
+
+## other MOVE tasks
+
 * Azure Message Bus (replace Queue and Worker)
 
 Note: speaker notes FTW!
